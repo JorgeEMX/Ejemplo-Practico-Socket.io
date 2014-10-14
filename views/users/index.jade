@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    h1 Guardar nuevo usuario
+    form(method='post', action='/users/add/')
+        p Nombre del usuario
+        input(name = 'name',type = 'text')
+        input(name = 'Guardar',type = 'Submit')
+        
+    if user
+        script.
+            var user = #{user};
+            alert('Se ha creado correctamente el nuevo usuario');
+            
+            var socket = io();
+            socket.emit('new_user', user);

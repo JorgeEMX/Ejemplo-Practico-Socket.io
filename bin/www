@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+var debug     = require('debug')('my-application');
+var app       = require('../app');
+var http      = require('http');
+var socketio  = require('socket.io');
+var server    = http.Server(app);
+var io        = socketio.listen(server);
+
+require('../sockets')(io);
+app.set('port', process.env.PORT || 3000);
+server.listen(app.get('port'), function(){
+  console.log("Express server listening on port " + server.address().port);
+});

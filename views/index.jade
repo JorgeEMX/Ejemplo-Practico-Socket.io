@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  script.
+    var socket = io();
+    socket.on('new_user', function(user){
+    
+      var text_notification = 'Se ha creado un nuevo usuario, el id del usuario es: ' + user;
+      
+      if(!window.Notification){
+        alert(text_notification);
+      }
+      else
+      {
+        Notification.requestPermission(function(status){
+          if(status === 'granted'){
+            var n = new Notification("Nuevo usuario creado",{ body: text_notification});
+          }
+        });
+      }
+    });
