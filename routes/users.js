@@ -8,8 +8,13 @@ var user_id = 0;
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  console.log('User id: ' + user_id);
-  res.render('users/index', {title: 'Agregar Usuario', user: user_id});
+  var new_user = 0;
+  
+  if (user_id != 0){
+    new_user  = user_id;
+    user_id   = 0;
+  }
+  res.render('users/index', {title: 'Agregar Usuario', user: new_user});
 });
 
 router.post('/add/', function(req, res, next) {
